@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, PhotoUploadForm
 from .models import Photo
+from django.contrib import messages
 from Crypto.Cipher import AES
 import os
 
@@ -17,7 +18,8 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect('home')
-        # else, retrun to login.html with error text
+        else:
+            messages.error(request, 'Invalid username or password.')
     return render(request, 'gallery/login.html')
 
 def register_view(request):

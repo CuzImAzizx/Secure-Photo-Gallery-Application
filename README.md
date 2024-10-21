@@ -21,5 +21,7 @@ The app now stores the images as they are. They should be encrypted using the AE
 #### 2- Enhance the UI/UX
 Build a better UI for the app, with appropiate error messages.
 
+#### 3- Validation
+Validate the inputs for registration, login, and uploading. 
 ---
 
