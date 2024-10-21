@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-mvs(9x6ri1-id$hct0c0x1l5)3kroyz0hle1avtn8wljx1qxt%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+AUTH_USER_MODEL = 'gallery.CustomUser' 
 
 
 MIDDLEWARE = [
