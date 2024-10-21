@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, PhotoUploadForm
 from .models import Photo
 from django.contrib import messages
-from Crypto.Cipher import AES
 import os
 
 # AES Encryption settings
@@ -45,10 +44,7 @@ def upload_photo_view(request):
         if form.is_valid():
             photo = form.save(commit=False)
             image_data = form.cleaned_data['image'].read()
-            # Encrypt the image using AES
-            cipher = AES.new(KEY, AES.MODE_EAX)
-            ciphertext, tag = cipher.encrypt_and_digest(image_data)
-            photo.encrypted_data = ciphertext
+            # TODO: Encrypt before saving/storing
             photo.user = request.user
             photo.save()
             return redirect('view_photos')
