@@ -1,6 +1,95 @@
-<h2>Upload Photo</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photo</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #444; /* خلفية رمادية */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            position: relative; /* إضافة موضع نسبي */
+        }
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        input[type="file"]:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #28a745; /* تغيير اللون إلى الأخضر عند التأشير */
+            transform: scale(1.05); /* جعل الزر يكبر قليلاً عند التمرير */
+        }
+        .back-btn {
+            position: absolute; /* تعيين الزر بموقع مطلق */
+            bottom: 20px; /* المسافة من الأسفل */
+            left: 20px; /* المسافة من اليسار */
+            padding: 6px 12px; /* جعل الزر أصغر */
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 12px; /* حجم النص */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #28a745; /* تغيير اللون إلى الأخضر عند التأشير */
+            transform: scale(1.05); /* تكبير الزر قليلاً عند التمرير */
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h2>Upload Photo</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <!-- زر العودة إلى الصفحة الرئيسية -->
+    <a href="{% url 'home' %}" class="back-btn">Return</a>
+</body>
+</html>

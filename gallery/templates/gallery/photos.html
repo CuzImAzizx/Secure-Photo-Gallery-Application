@@ -1,6 +1,103 @@
-<h2>Your Photos</h2>
-{% for photo in photos %}
-    <img src="{{ photo.image.url }}" alt="Photo" width="200">
-{% empty %}
-    <p>No photos uploaded yet.</p>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Photos</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #444;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .photo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .photo {
+            width: 350px; /* زيادة عرض الصور */
+            margin: 0 10px; /* مسافة بين الصور */
+            transition: transform 0.3s ease;
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 24px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .no-photos {
+            text-align: center;
+            font-size: 18px;
+            color: #ccc;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Photos</h2>
+    <div class="photo-container">
+        <div class="navigation">
+            <button class="arrow" onclick="prevPhoto()">&#10094;</button>
+            <button class="arrow" onclick="nextPhoto()">&#10095;</button>
+        </div>
+        {% for photo in photos %}
+            <img src="{{ photo.image.url }}" alt="Photo" class="photo" style="display: none;">
+        {% empty %}
+            <p class="no-photos">No photos uploaded yet.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const photos = document.querySelectorAll('.photo');
+
+        function showPhoto(index) {
+            photos.forEach((photo, i) => {
+                photo.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function prevPhoto() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : photos.length - 1;
+            showPhoto(currentIndex);
+        }
+
+        function nextPhoto() {
+            currentIndex = (currentIndex < photos.length - 1) ? currentIndex + 1 : 0;
+            showPhoto(currentIndex);
+        }
+
+        // Initial display
+        showPhoto(currentIndex);
+    </script>
+</body>
+</html>
