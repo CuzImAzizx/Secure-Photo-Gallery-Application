@@ -1,2 +1,3 @@
-db.sqlite3
-__pycache__
+*.sqlite3
+media/photos/
+encrypted_photo_gallery/__pycache__/
