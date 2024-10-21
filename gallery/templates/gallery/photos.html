@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Photos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -16,88 +17,67 @@
             height: 100vh;
             margin: 0;
             position: relative;
+            padding: 20px;
         }
         h2 {
             margin-bottom: 20px;
             font-size: 24px;
             font-weight: bold;
         }
-        .photo-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            width: 100%;
+            max-width: 800px; /* عرض أقصى للمعرض */
         }
         .photo {
-            width: 350px; /* زيادة عرض الصور */
-            margin: 0 10px; /* مسافة بين الصور */
+            width: 200px; /* توحيد عرض الصور */
+            border-radius: 8px;
             transition: transform 0.3s ease;
         }
-        .arrow {
-            cursor: pointer;
-            font-size: 24px;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            padding: 5px;
-            transition: background-color 0.3s;
-        }
-        .arrow:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        .photo:hover {
+            transform: scale(1.05); /* تكبير الصورة قليلاً عند التأشير */
         }
         .no-photos {
             text-align: center;
             font-size: 18px;
             color: #ccc;
         }
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0 20px;
+        .home-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .home-btn:hover {
+            background-color: #28a745; /* تغيير اللون إلى الأخضر عند التأشير */
+            transform: scale(1.05); /* تكبير الزر قليلاً عند التمرير */
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
 </head>
 <body>
     <h2>Your Photos</h2>
-    <div class="photo-container">
-        <div class="navigation">
-            <button class="arrow" onclick="prevPhoto()">&#10094;</button>
-            <button class="arrow" onclick="nextPhoto()">&#10095;</button>
-        </div>
+    <div class="gallery">
         {% for photo in photos %}
-            <img src="{{ photo.image.url }}" alt="Photo" class="photo" style="display: none;">
+            <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="Your Photo">
+                <img src="{{ photo.image.url }}" alt="Photo" class="photo">
+            </a>
         {% empty %}
             <p class="no-photos">No photos uploaded yet.</p>
         {% endfor %}
     </div>
 
+    <!-- زر العودة إلى الصفحة الرئيسية -->
+    <a href="http://127.0.0.1:8000/" class="home-btn">Back to Home</a>
+
     <script>
-        let currentIndex = 0;
-        const photos = document.querySelectorAll('.photo');
-
-        function showPhoto(index) {
-            photos.forEach((photo, i) => {
-                photo.style.display = i === index ? 'block' : 'none';
-            });
-        }
-
-        function prevPhoto() {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : photos.length - 1;
-            showPhoto(currentIndex);
-        }
-
-        function nextPhoto() {
-            currentIndex = (currentIndex < photos.length - 1) ? currentIndex + 1 : 0;
-            showPhoto(currentIndex);
-        }
-
-        // Initial display
-        showPhoto(currentIndex);
+        // Optional: You can add additional JavaScript if needed
     </script>
 </body>
 </html>
