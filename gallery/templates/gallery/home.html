@@ -14,6 +14,7 @@
             height: 100vh;
             margin: 0;
             color: #fff;
+            position: relative; /* لجعل الزر في الزاوية العلوية اليمنى */
         }
         .welcome-container {
             background-color: rgba(255, 255, 255, 0.1);
@@ -32,7 +33,7 @@
             display: inline-block;
             margin: 10px 0;
             padding: 12px 24px;
-            background-color: #007BFF;
+            background-color: #007BFF; /* لون الأزرار الأخرى */
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
@@ -44,9 +45,33 @@
             background-color: #28a745; /* تغيير اللون إلى الأخضر عند التأشير */
             transform: scale(1.05); /* تكبير الرابط قليلاً عند التمرير */
         }
+        .logout-btn {
+            position: absolute; /* لجعل الزر يطفو فوق المحتوى */
+            top: 20px; /* المسافة من أعلى الصفحة */
+            right: 20px; /* المسافة من الجانب الأيمن */
+            padding: 10px 20px;
+            background-color: #fff; /* لون الزر أبيض */
+            color: #444; /* لون الكتابة رمادي غامق */
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #ff4d4d; /* لون الزر أحمر عند التأشير */
+            color: #fff; /* تغيير لون الكتابة إلى أبيض */
+        }
+        .logout-btn:hover:after {
+            content: "Bye 👋🏻😢"; /* تغيير النص عند التأشير */
+        }
+        .logout-btn:after {
+            content: "Log out"; /* النص الافتراضي */
+        }
     </style>
 </head>
 <body>
+    <a href="http://127.0.0.1:8000/login/" class="logout-btn"></a> <!-- زر تسجيل الخروج -->
     <div class="welcome-container">
         <h2>Welcome, {{ user.username }}!</h2>
         <a href="{% url 'upload_photo' %}">Upload Photo</a>
