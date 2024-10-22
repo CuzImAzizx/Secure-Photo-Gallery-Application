@@ -1,5 +1,9 @@
 *.sqlite3
+
 media/photos/
-encrypted_photo_gallery/__pycache__/
+
+__pycache__/
+*.pyc
+
 gallery/__pycache__/
 gallery/migrations/__pycache__/
