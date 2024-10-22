@@ -64,9 +64,11 @@
 <body>
     <h2>Your Photos</h2>
     <div class="gallery">
-        {% for photo in photos %}
-            <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="Your Photo">
-                <img src="{{ photo.image.url }}" alt="Photo" class="photo">
+        {% load custom_filters %}
+
+        {% for photo_id, image_data in photos %}
+            <a href="data:image/jpeg;base64,{{ image_data|b64encode }}" data-lightbox="gallery" data-title="Your Photo">
+                <img src="data:image/jpeg;base64,{{ image_data|b64encode }}" alt="Photo" class="photo">
             </a>
         {% empty %}
             <p class="no-photos">No photos uploaded yet.</p>
