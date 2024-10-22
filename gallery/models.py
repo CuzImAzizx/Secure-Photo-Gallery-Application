@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser, Group, Permission
-import secrets
 from django.conf import settings
 
 
 
 class CustomUser(AbstractUser):
-    key = models.CharField(max_length=32, blank=True)  # Field for random string
-        # Override the groups field
+    key = models.CharField(max_length=32, blank=True)  # Field for the encryption key 
+    
+    # Override the groups field
     groups = models.ManyToManyField(
         Group,
         related_name='customuser_set',
@@ -31,7 +31,6 @@ class CustomUser(AbstractUser):
 class Photo(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos/')
-    # encrypted_data = models.BinaryField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
