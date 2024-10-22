@@ -11,6 +11,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 from io import BytesIO
+from django.contrib.auth.decorators import login_required
 
 
 def encrypt_aes(data: bytes, key: str) -> bytes:
@@ -57,6 +58,9 @@ def decrypt_aes(encrypted_data: bytes, key: str) -> bytes:
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -69,6 +73,9 @@ def login_view(request):
     return render(request, 'gallery/login.html')
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -83,11 +90,11 @@ def register_view(request):
         form = UserRegistrationForm()
     return render(request, 'gallery/register.html', {'form': form})
 
+@login_required
 def home_view(request):
-    if request.user.is_authenticated:
-        return render(request, 'gallery/home.html')
-    return redirect('login')
+    return render(request, 'gallery/home.html')
 
+@login_required
 def upload_photo_view(request):
     if request.method == 'POST':
         form = PhotoUploadForm(request.POST, request.FILES)
@@ -121,6 +128,7 @@ def upload_photo_view(request):
         form = PhotoUploadForm()
     return render(request, 'gallery/upload.html', {'form': form})
 
+@login_required
 def view_photos(request):
     photos = Photo.objects.filter(user=request.user)
     
