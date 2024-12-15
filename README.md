@@ -2,7 +2,7 @@
 This is a project for MATH319 course. Full information is in [this pdf file](./Math319%20assignment%202024_Semester2.pdf). Our project idea to make a secure photo gallery application using python. Users are able to store their images securly and retrieve them.
 
 # Status: Completed ✅
-The application successfully meets all project constraints. We have documented our process in a [report](./report.pdf) and [presented](./presentaion.pdf) our work, and we got full marks for the project.
+The application successfully meets all project constraints. We have documented our process in a [report](./report.pdf) and [presented](./presentation.pdf) our work, and we got full marks for the project.
 ![alt text](image.png)
 
 
@@ -12,6 +12,7 @@ The application successfully meets all project constraints. We have documented o
 - **AES Encryption**: Images are encrypted using the AES cryptosystem to ensure data privacy.
 - **Decryption for Viewing**: Users can view their images, which are decrypted on-the-fly when accessed.
 - **User Interface**: A simple and intuitive web interface for user interactions.
+![alt text](image2.png)
 
 # Technologies Used
 - Python
